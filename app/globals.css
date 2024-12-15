@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-gray-900 dark:text-gray-100;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+/* Smooth transitions */
+.transition-theme {
+  @apply transition-all duration-200;
+}
+
+.profile-cards {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 24px;
+  flex: 1;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 16px;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.card p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #666;
+}
+
+.card .role {
+  color: #6f37af;
+}
+
+/* Verified check */
+.verified-badge {
+  position: relative;
+  display: inline-block;
+}
+
+.verified-badge::after {
+  content: '✔';
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: #2b9aff;
+  color: #fff;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 600;
+  border: 2px solid #fff;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.time-allocation {
+  margin-bottom: 24px;
+  background: #f3f7fa;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.sidebar h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.objectives {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.objectives li {
+  position: relative;
+  margin-bottom: 16px;
+  padding-left: 24px;
+  font-size: 14px;
+}
+
+.objectives li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.prompt-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.prompt-input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.prompt-textarea {
+  width: 100%; /* Full width of the container */
+  height: 150px; /* Height of the textarea */
+  padding: 10px; /* Inner spacing */
+  font-size: 16px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border style */
+  resize: vertical; /* Allow user to resize vertically only */
+}
+
+.prompt-submit-button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+.prompt-submit-button:hover {
+  background-color: #0056b3;
+}
