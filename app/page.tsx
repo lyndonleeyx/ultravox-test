@@ -280,7 +280,7 @@ export default function App() {
   const [systemPrompt, setSystemPrompt] = useState(demoConfig.callConfig.systemPrompt);
   const [promptInput, setPromptInput] = useState('');
 
-  const handlePromptChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPromptInput(e.target.value);
   };
 
@@ -344,13 +344,12 @@ export default function App() {
 
         <div className="prompt-input-container">
           <textarea
-              type="text"
               placeholder="Enter a custom prompt"
               value={promptInput}
               onChange={handlePromptChange}
               className="prompt-input"
               disabled={false} 
-              rows="4"
+              rows={4}
           ></textarea>
           <button
               onClick={handleUpdatePrompt}
