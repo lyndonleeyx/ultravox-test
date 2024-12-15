@@ -39,6 +39,7 @@
   padding: 24px;
   flex: 1;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .profile-pic {
@@ -69,7 +70,6 @@
 /* Verified check */
 .verified-badge {
   position: relative;
-  display: inline-block;
 }
 
 .verified-badge::after {
@@ -96,6 +96,7 @@
   border-radius: 16px;
   padding: 16px;
   box-sizing: border-box;
+  margin-bottom: 2rem;
 }
 
 .time-allocation {
@@ -141,25 +142,21 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 400px;
   margin: 0 auto;
 }
 
 .prompt-input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.prompt-textarea {
-  width: 100%; /* Full width of the container */
-  height: 150px; /* Height of the textarea */
-  padding: 10px; /* Inner spacing */
-  font-size: 16px; /* Font size */
-  border-radius: 5px; /* Rounded corners */
-  border: 1px solid #ccc; /* Border style */
-  resize: vertical; /* Allow user to resize vertically only */
+  background-color: rgb(213, 213, 213); /* Matching background */
+  border-radius: 1rem; /* Rounded corners */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow effect */
+  padding: 1rem; /* Matching padding */
+  font-size: 1rem; /* Consistent font size */
+  border: none; /* Remove border for a clean look */
+  outline: none; /* Remove focus outline */
+  resize: vertical; /* Prevent resizing for a consistent design */
+  height: auto; /* Ensure height adjusts */
+  min-height: 100px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; /* Matching font */
 }
 
 .prompt-submit-button {
@@ -170,8 +167,29 @@
   background-color: #007BFF;
   color: #fff;
   cursor: pointer;
+  margin-bottom: 2rem;
 }
 
 .prompt-submit-button:hover {
   background-color: #0056b3;
+  flex: 1; /* Allow the button to grow or shrink as needed */
+  height: 3rem; /* Equivalent to h-12 */
+  border-radius: 0.75rem; /* Equivalent to rounded-xl */
+  font-weight: 500; /* Equivalent to font-medium */
+  transition: all 0.3s ease; /* Smooth transitions for color, shadow, etc. */
+}
+
+.current-prompt-container {
+  background-color: rgb(213, 213, 213); /* Default background */
+  border-radius: 1rem; /* Equivalent to rounded-2xl */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Equivalent to shadow-lg */
+  padding: 1rem; /* Equivalent to p-4 */
+  margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+}
+
+.current-prompt-container pre {
+  white-space: pre-wrap; /* Preserve formatting while allowing line wrapping */
+  word-break: break-word; /* Break long words */
+  overflow-x: auto; /* Add horizontal scrolling if needed */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif
 }
