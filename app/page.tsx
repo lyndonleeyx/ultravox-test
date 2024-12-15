@@ -324,7 +324,7 @@ export default function App() {
             <div className="verified-badge">
               <img className="profile-pic" src="img/DrJones.jpeg" alt="Dr Jones" />
             </div>
-            <h2>Catherine</h2>
+            <h2>Sales Coach</h2>
             <p>Customer Company</p>
             <p className="role">Client</p>
           </div>
