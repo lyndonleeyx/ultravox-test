@@ -325,8 +325,8 @@ export default function App() {
               <img className="profile-pic" src="img/DrJones.jpeg" alt="Dr Jones" />
             </div>
             <h2>Catherine</h2>
-            <p>Mammoth</p>
-            <p className="role">Business Development Manager</p>
+            <p>Customer Company</p>
+            <p className="role">Client</p>
           </div>
 
           <div className="sidebar">
@@ -342,27 +342,28 @@ export default function App() {
           </div>
         </div>
 
-          <div className="prompt-input-container">
-            <input
-                type="text"
-                placeholder="Enter a custom prompt"
-                value={promptInput}
-                onChange={handlePromptChange}
-                className="prompt-input-container"
-                disabled={false} 
-            />
-            <button
-                onClick={handleUpdatePrompt}
-                className="prompt-submit-button"
-            >
-                Set Context
-            </button>
+        <div className="prompt-input-container">
+          <textarea
+              type="text"
+              placeholder="Enter a custom prompt"
+              value={promptInput}
+              onChange={handlePromptChange}
+              className="prompt-input"
+              disabled={false} 
+              rows="4"
+          ></textarea>
+          <button
+              onClick={handleUpdatePrompt}
+              className="prompt-submit-button"
+          >
+              Set Context
+          </button>
         </div>
 
-          <div className="text-gray-500 mt-4">
-            <p>Current System Prompt:</p>
-            <pre>{systemPrompt}</pre>
-          </div>
+        <div className="current-prompt-container">
+          <p>Current System Prompt:</p>
+          <pre>{systemPrompt}</pre>
+        </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 mb-6">
           <ConversationDisplay
