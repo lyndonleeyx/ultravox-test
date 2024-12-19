@@ -201,8 +201,6 @@ const MainPage: React.FC = () => {
 
   return (
     <main>
-      <h1>Main Page</h1>
-      <p>Current System Prompt: {systemPrompt}</p>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <div>

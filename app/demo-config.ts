@@ -4,8 +4,7 @@ import { ShowerHead } from "lucide-react";
 function getSystemPrompt() {
   let sysPrompt: string;
   
-  sysPrompt = `
-  You are simulating a persona based on company and situation context described below. Your job is to act as Catherine while I (as a sales rep at AlphaSense - our company) train myself to converse with you.
+  sysPrompt = `You are simulating a persona based on company and situation context described below. Your job is to act as Catherine while I (as a sales rep at AlphaSense - our company) train myself to converse with you.
 
   Use the information and context below to simulate the persona fully and open up with a hello so I can start with the agenda.
 
