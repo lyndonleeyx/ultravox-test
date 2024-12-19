@@ -1,23 +1,32 @@
+// pages/prompt.tsx
 'use client';
-import React, { useState } from 'react';
-import { PromptProvider, usePrompt } from '../contexts/promptcontext'
+import React, { useEffect, useState } from 'react';
+import { usePrompt } from '../../contexts/promptcontext';
+import { useRouter } from 'next/navigation';
 
 const PromptPage: React.FC = () => {
-  const {systemPrompt, setSystemPrompt} = usePrompt();
+  const { systemPrompt, setSystemPrompt } = usePrompt();
   const [promptInput, setPromptInput] = useState('');
+  const router = useRouter();
 
-  
+  useEffect(() => {
+    setPromptInput(systemPrompt);
+    console.log('PromptPage: systemPrompt updated to', systemPrompt);
+  }, [systemPrompt]);
+
   const handlePromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPromptInput(e.target.value);
   };
 
   const handleUpdatePrompt = () => {
+    console.log('PromptPage: Updating systemPrompt to', promptInput);
     setSystemPrompt(promptInput);
+    router.push('/'); // Navigate back to the main page
   };
 
   return (
-    <PromptProvider>
-    <div className="prompt-page">
+    <main>
+      <div className="prompt-page">
       <div className="prompt-input-container">
         <textarea
           placeholder="Enter a custom prompt"
@@ -35,7 +44,7 @@ const PromptPage: React.FC = () => {
         <pre>{systemPrompt}</pre>
       </div>
     </div>
-    </PromptProvider>
+    </main>
   );
 };
 
