@@ -14,9 +14,6 @@ const ConversationDisplay = forwardRef<HTMLDivElement, ConversationDisplayProps>
   ({ transcript, currentText, toolResults }, ref) => {
     const latestMessageRef = useRef<HTMLDivElement>(null);
 
-    // 添加日志来查看传入的数据
-    console.log('ConversationDisplay received toolResults:', toolResults);
-
     return (
       <div ref={ref} className="h-[500px] p-6 overflow-y-auto relative">
         {transcript?.filter(item => item.speaker === 'agent').map((item, index, filteredArray) => {

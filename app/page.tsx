@@ -1,9 +1,9 @@
+// pages/index.tsx
 'use client';
-import demoConfig from './demo-config';
-import { usePrompt } from './contexts/promptcontext';
-
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { usePrompt } from '../contexts/promptcontext';
 import { useRouter } from 'next/navigation';
+import demoConfig from './demo-config';
 
 
 import { 
@@ -27,9 +27,16 @@ import DebugMessages from './components/DebugMessages';
 import { Sun, Moon } from 'lucide-react';
 import ToolStatusIndicator from './components/ToolStatusIndicator';
 
-const MainPage = () => {
+
+const MainPage: React.FC = () => {
+  const { systemPrompt } = usePrompt();
+
+  useEffect(() => {
+    console.log('MainPage: systemPrompt is', systemPrompt);
+  }, [systemPrompt]);
+
   const router = useRouter(); // Next.js router for navigation
-  
+
   const [isCallActive, setIsCallActive] = useState(false);
   const [agentStatus, setAgentStatus] = useState<string>('off');
   const [currentText, setCurrentText] = useState('');
@@ -78,13 +85,19 @@ const MainPage = () => {
   const startAudioCall = async () => {
     try {
       //console.log('Starting call with tools:', demoConfig.callConfig.selectedTools);
-      
+      const updatedConfig = {
+        ...demoConfig.callConfig,
+        systemPrompt, // Inject the current systemPrompt dynamically
+      };
+
+      console.log('Starting call with updated config:', updatedConfig);
+
       const callbacks = {
         onStatusChange: handleStatusChange,
         onTranscriptChange: handleTranscriptChange,
       };
 
-      await startCall(callbacks, demoConfig.callConfig, true);
+      await startCall(callbacks, updatedConfig, true);
       setIsCallActive(true);
       handleStatusChange('Call started successfully');
     } catch (error) {
@@ -181,19 +194,15 @@ const MainPage = () => {
       localStorage.setItem('theme', 'light');
     }
   };
-  
-  
-
-  const { systemPrompt } = usePrompt();
-
-  console.log('Main Page System Prompt:', systemPrompt);
 
   const handleChangePrompt = () => {
     router.push('/prompt'); // Navigate to /prompt
   };
 
   return (
-    <main className="min-h-screen">
+    <main>
+      <h1>Main Page</h1>
+      <p>Current System Prompt: {systemPrompt}</p>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -316,9 +325,8 @@ const MainPage = () => {
       <div className="prompt-change">
         <button onClick={handleChangePrompt}>Change Prompt Here</button>
       </div>
-      
     </main>
   );
-}
+};
 
-  export default MainPage;
+export default MainPage;
