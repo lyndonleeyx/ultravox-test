@@ -2,6 +2,8 @@
 import demoConfig from './demo-config';
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { 
   Role,                              // 用于定义角色（user/assistant）
   Transcript,                        // 对话记录类型
@@ -23,7 +25,10 @@ import DebugMessages from './components/DebugMessages';
 import { Sun, Moon } from 'lucide-react';
 import ToolStatusIndicator from './components/ToolStatusIndicator';
 
-export default function App() {
+const MainPage = () => {
+
+  const router = useRouter(); // Next.js router for navigation
+  
   const [isCallActive, setIsCallActive] = useState(false);
   const [agentStatus, setAgentStatus] = useState<string>('off');
   const [currentText, setCurrentText] = useState('');
@@ -68,71 +73,6 @@ export default function App() {
       setCallTranscript(transcriptsWithMeta);
     }
   }, []);
-
-  // const handleDebugMessage = useCallback((message: UltravoxExperimentalMessageEvent) => {
-  //   if (message.target && 'registeredTools' in message.target) {
-  //     console.log('Registered Tools:', message.target.registeredTools);
-  //   }
-    
-  //   setCallDebugMessages(prev => [...prev, message]);
-    
-  //   // 处理工具响应
-  //   if (message.message?.type === 'tool_response') {
-  //     const toolResponse = message.message;
-  //     console.log('Tool Response:', toolResponse);
-      
-  //     switch (toolResponse.tool) {
-  //       case 'speechAnalysis':
-  //         const analysisData = toolResponse.response?.analysisData;
-  //         if (analysisData) {
-  //           setToolResults(prev => ({
-  //             ...prev,
-  //             speechAnalysis: Array.isArray(analysisData) ? analysisData : [{
-  //               text: analysisData.text || '',
-  //               score: analysisData.score || 0,
-  //               feedback: analysisData.feedback || '',
-  //               category: analysisData.category
-  //             }]
-  //           }));
-  //         }
-  //         break;
-          
-  //       case 'errorCorrection':
-  //         const correctionData = toolResponse.response?.correctionData;
-  //         if (correctionData) {
-  //           setToolResults(prev => ({
-  //             ...prev,
-  //             corrections: Array.isArray(correctionData) ? correctionData : [{
-  //               text: correctionData.text || '',
-  //               type: correctionData.type || 'grammar',
-  //               correction: correctionData.correction || '',
-  //               explanation: correctionData.explanation
-  //             }]
-  //           }));
-  //         }
-  //         break;
-  //     }
-  //   }
-
-  //   // 处理 LLM 响应
-  //   if (message.message?.type === 'debug' && message.message.message?.startsWith('LLM response:')) {
-  //     const responseText = message.message.message
-  //       .replace('LLM response: ', '')
-  //       .replace(/^"|"$/g, '');
-      
-  //     setCallTranscript(prev => {
-  //       const newTranscript = new Transcript(
-  //         responseText,
-  //         true,
-  //         Role.AGENT,
-  //         Medium.TEXT
-  //       );
-
-  //       if (!prev) return [newTranscript];
-  //       return [...prev, newTranscript];
-  //     });
-  //   }
-  // }, []);
 
   const startAudioCall = async () => {
     try {
@@ -241,42 +181,6 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    // 监听语音分析事件
-    const handleSpeechAnalysis = (event: CustomEvent) => {
-      console.log('收到语音分析事件:', event.detail);
-      //alert(`收到语音分析结果：\n${JSON.stringify(event.detail, null, 2)}`);
-      setToolResults(prev => ({
-        ...prev,
-        speechAnalysis: Array.isArray(event.detail) ? event.detail : [event.detail]
-      }));
-    };
-
-    // 监听错误纠正事件
-    const handleErrorCorrection = (event: CustomEvent) => {
-      console.log('收到错误纠正事件:', event.detail);
-      //alert(`收到错误纠正结果：\n${JSON.stringify(event.detail, null, 2)}`);
-      setToolResults(prev => ({
-        ...prev,
-        corrections: Array.isArray(event.detail) ? event.detail : [event.detail]
-      }));
-    };
-
-    // 添加事件监听器
-    window.addEventListener('speechAnalysisUpdated', handleSpeechAnalysis as EventListener);
-    window.addEventListener('errorCorrectionUpdated', handleErrorCorrection as EventListener);
-
-    // 清理事件监听器
-    return () => {
-      window.removeEventListener('speechAnalysisUpdated', handleSpeechAnalysis as EventListener);
-      window.removeEventListener('errorCorrectionUpdated', handleErrorCorrection as EventListener);
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log('toolResults updated:', toolResults);
-  }, [toolResults]);
-
   const [systemPrompt, setSystemPrompt] = useState(demoConfig.callConfig.systemPrompt);
   const [promptInput, setPromptInput] = useState('');
 
@@ -290,6 +194,10 @@ export default function App() {
       demoConfig.callConfig.systemPrompt = promptInput.trim();
       console.log('Updated systemPrompt:', demoConfig.callConfig.systemPrompt);
     }
+  };
+
+  const handleChangePrompt = () => {
+    router.push('/prompt'); // Navigate to /prompt
   };
 
   return (
@@ -340,28 +248,6 @@ export default function App() {
               <li><strong>Objective 3</strong><br/>Description here</li>
             </ul>
           </div>
-        </div>
-
-        <div className="prompt-input-container">
-          <textarea
-              placeholder="Enter a custom prompt"
-              value={promptInput}
-              onChange={handlePromptChange}
-              className="prompt-input"
-              disabled={false} 
-              rows={4}
-          ></textarea>
-          <button
-              onClick={handleUpdatePrompt}
-              className="prompt-submit-button"
-          >
-              Set Context
-          </button>
-        </div>
-
-        <div className="current-prompt-container">
-          <p>Current System Prompt:</p>
-          <pre>{systemPrompt}</pre>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 mb-6">
@@ -435,6 +321,12 @@ export default function App() {
         {/* <ToolStatusIndicator toolResults={toolResults} /> */}
         {/* <DebugMessages debugMessages={callDebugMessages} /> */}
       </div>
+      <div className="prompt-change">
+        <button onClick={handleChangePrompt}>Change Prompt Here</button>
+      </div>
+      
     </main>
   );
 }
+
+  export default MainPage;
