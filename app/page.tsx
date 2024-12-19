@@ -1,8 +1,10 @@
 'use client';
 import demoConfig from './demo-config';
+import { usePrompt } from './contexts/promptcontext';
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+
 
 import { 
   Role,                              // 用于定义角色（user/assistant）
@@ -26,7 +28,6 @@ import { Sun, Moon } from 'lucide-react';
 import ToolStatusIndicator from './components/ToolStatusIndicator';
 
 const MainPage = () => {
-
   const router = useRouter(); // Next.js router for navigation
   
   const [isCallActive, setIsCallActive] = useState(false);
@@ -180,21 +181,12 @@ const MainPage = () => {
       localStorage.setItem('theme', 'light');
     }
   };
+  
+  
 
-  const [systemPrompt, setSystemPrompt] = useState(demoConfig.callConfig.systemPrompt);
-  const [promptInput, setPromptInput] = useState('');
+  const { systemPrompt } = usePrompt();
 
-  const handlePromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPromptInput(e.target.value);
-  };
-
-  const handleUpdatePrompt = () => {
-    if (promptInput.trim()) {
-      setSystemPrompt(promptInput.trim());
-      demoConfig.callConfig.systemPrompt = promptInput.trim();
-      console.log('Updated systemPrompt:', demoConfig.callConfig.systemPrompt);
-    }
-  };
+  console.log('Main Page System Prompt:', systemPrompt);
 
   const handleChangePrompt = () => {
     router.push('/prompt'); // Navigate to /prompt

@@ -1,11 +1,12 @@
 'use client';
-import demoConfig from '../demo-config';
 import React, { useState } from 'react';
+import { PromptProvider, usePrompt } from '../contexts/promptcontext'
 
 const PromptPage: React.FC = () => {
+  const {systemPrompt, setSystemPrompt} = usePrompt();
   const [promptInput, setPromptInput] = useState('');
-  const [systemPrompt, setSystemPrompt] = useState(demoConfig.callConfig.systemPrompt);
 
+  
   const handlePromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPromptInput(e.target.value);
   };
@@ -15,6 +16,7 @@ const PromptPage: React.FC = () => {
   };
 
   return (
+    <PromptProvider>
     <div className="prompt-page">
       <div className="prompt-input-container">
         <textarea
@@ -33,6 +35,7 @@ const PromptPage: React.FC = () => {
         <pre>{systemPrompt}</pre>
       </div>
     </div>
+    </PromptProvider>
   );
 };
 
