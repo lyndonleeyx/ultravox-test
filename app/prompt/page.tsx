@@ -29,7 +29,7 @@ const PromptPage: React.FC = () => {
   };
 
   const fetchGoogleDocContent = async () => {
-    const docUrl = 'https://docs.google.com/document/d/e/2PACX-1vTbeQ87opGv2gqOAwPWTr6XHOluTR-jAnHfHapG0kHHEp8ithuuRrUSBJdHdtrzgu0SytZ5o4vkhl_M/pub'; // Replace with your published Google Doc URL
+    const docUrl = 'https://docs.google.com/document/d/e/2PACX-1vQnG-ZkQH7DHpqCIHUiVjdf-Wiq0hMPqgxQLb1hp0YRYq4oPP27_50OnK0_LByIgpDCFwaSLnTdtMQw/pub'; // Replace with your published Google Doc URL
 
     try {
       // Fetch the Google Doc HTML content
@@ -59,7 +59,7 @@ const PromptPage: React.FC = () => {
       'Learn more',
       'MB Demo File for Fetching',
       'Updated automatically every 5 minutes',
-      'Main Tab',
+      'Tab 2',
     ];
 
     boilerplatePhrases.forEach((phrase) => {
