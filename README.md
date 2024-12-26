@@ -1,6 +1,6 @@
-# Winko.AI English Partner
+# Mockingbird Sales Enablement Platform
 
-An AI-powered English conversation practice assistant built with Next.js and Ultravox voice chat technology.
+An AI-powered sales practice assistant built with Next.js and Ultravox voice chat technology.
 
 ## Features
 
@@ -26,12 +26,3 @@ An AI-powered English conversation practice assistant built with Next.js and Ult
 - Node.js 16.x or later
 - Ultravox API key
 - Modern web browser with microphone support
-
-## Getting Started
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/foreveryh/winko-ai-english-partner
-cd winko-ai-english-partner
-```
