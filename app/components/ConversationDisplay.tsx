@@ -16,7 +16,7 @@ const ConversationDisplay = forwardRef<HTMLDivElement, ConversationDisplayProps>
 
     return (
       <div ref={ref} className="h-[500px] p-6 overflow-y-auto relative">
-        {transcript?.filter(item => item.speaker === 'agent').map((item, index, filteredArray) => {
+        {transcript?.map((item, index, filteredArray) => {
           const isLatest = index === (filteredArray.length - 1);
           
           return (
@@ -28,7 +28,7 @@ const ConversationDisplay = forwardRef<HTMLDivElement, ConversationDisplayProps>
                 }`}
               >
                 <p className="text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  AI
+                  {item.speaker === 'agent' ? "Catherine" : "You"}
                 </p>
                 <p className={`${
                   isLatest 

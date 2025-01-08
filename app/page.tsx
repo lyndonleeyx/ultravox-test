@@ -256,7 +256,7 @@ const MainPage: React.FC = () => {
             currentText={currentText}
             toolResults={toolResults}
           >
-            {chatHistory.map((chat, index) => (
+            {/* {chatHistory.map((chat, index) => (
               <div 
                 key={chat.timestamp}
                 className={`mb-4 transition-opacity duration-200 ${
@@ -270,7 +270,7 @@ const MainPage: React.FC = () => {
                 </p>
                 <p className="mt-1">{chat.message}</p>
               </div>
-            ))}
+            ))} */}
           </ConversationDisplay>
         </div>
 
